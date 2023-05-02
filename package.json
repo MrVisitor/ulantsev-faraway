@@ -1,0 +1,70 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "name": "Yuriy Ulantsev",
+    "email": "yuriy.ulantsev@gmail.com"
+  },
+  "engines": {
+    "node": ">= 19.9.0 <19",
+    "npm": ">= 9.6.3 <10"
+  },
+  "scripts": {
+    "start": "npx webpack serve --open",
+    "build": "node_modules/.bin/webpack",
+    "test": "#",
+    "lint": "node_modules/.bin/eslint src",
+    "precommit-msg": "echo Runing pre-commit check ...",
+    "audit": "level=$(npm audit --parseable | grep -E 'high|critical' | wc -l | rev); if [ $level != 0 ]; then echo 'Need fix audit errors ('$level') high or critical level before than do new commit!' && exit 125; else exit 0; fi"
+  },
+  "pre-commit": {
+    "run": [
+      "precommit-msg",
+      "lint",
+      "audit"
+    ],
+    "silent": true
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-redux": "^7.1.25",
+    "react-redux": "^8.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.5",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.16.3",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
+    "babel-loader": "^9.1.2",
+    "eslint": "^8.39.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-webpack-plugin": "^4.0.1",
+    "html-webpack-plugin": "^5.5.1",
+    "terser-webpack-plugin": "^5.3.7",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2",
+    "webpack-dev-server": "^4.13.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
