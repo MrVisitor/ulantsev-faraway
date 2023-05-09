@@ -21,3 +21,15 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+*.pem
+*.ppk
+*.tfstate
+*.tfstate.backup
+*.swp
+terraform/.terraform/
+terraform/.terraform.tfstate.lock.info
+**/*/*.tfstate
+**/*/*.tfstate.backup
+**/*/.terraform/
+.DS_Store

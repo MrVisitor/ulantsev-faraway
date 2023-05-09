@@ -20,7 +20,15 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "paths": {
+    "test-utils": ["./utils/test-utils"]
+  },
   "include": [
+    "**/*.d.ts",
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

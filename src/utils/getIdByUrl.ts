@@ -1,0 +1,1 @@
+export const getIdByUrl = (url: string): string|undefined => url.match(/\/(\d+)\/$/)?.[1]
