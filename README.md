@@ -5,7 +5,7 @@
 - Open a terminal in the root of the project
 - Run `npm install`
 - Run `npm start`
-- The Application should be running on [http://localhost:8080](http://localhost:8080)
+- The Application should be running on [http://localhost:8081](http://localhost:8081)
 
 ### Run Tests
 
@@ -24,6 +24,7 @@
 - Open a terminal in the root of the project
 - Run `make docker-build`
 - Run `make docker-run`
+- The Application should be running on [http://localhost:3000](http://localhost:3000)
 
 #### Stop Docker container
 
