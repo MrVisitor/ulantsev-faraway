@@ -1,6 +1,20 @@
-build
-node_modules
-npm-debug.log
+# dependencies
+/node_modules
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 .gitignore
 .git
 infrastructure
+/terraform
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local

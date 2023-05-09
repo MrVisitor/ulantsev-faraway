@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Avatar, Card, Grid, Skeleton, Typography, CardActionArea } from '@mui/material'
-
-import { getIdByUrl } from '../../../../utils/getIdByUrl'
-import { generateHexColorById } from '../../../../utils/generateHexById'
-import { CharacterResponseData } from '../../../../models/CharacterResponseData'
+import { getIdByUrl } from '@utils/getIdByUrl'
+import { generateHexColorById } from '@utils/generateHexById'
+import { CharacterResponseData } from '@models/CharacterResponseData'
 
 export type ItemProps<P = React.PropsWithChildren> = P & {
   isLoading: boolean;
@@ -18,7 +17,7 @@ const styleProps = {
   p: 1
 }
 
-function Cell({ isLoading, data, ...props }: ItemProps) {
+export const Cell = ({ isLoading, data, ...props }: ItemProps) => {
   const dataById = useMemo(() => ({
     url: data?.url ? `/list/${getIdByUrl(data?.url)}` : '/',
     avatar: {
@@ -62,5 +61,3 @@ function Cell({ isLoading, data, ...props }: ItemProps) {
     </Grid>
   )
 }
-
-export default Cell

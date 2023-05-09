@@ -1,7 +1,7 @@
-import { swApi } from '../../services/api'
-import { CharacterResponseData } from '../../models/CharacterResponseData'
-import { getIdByUrl } from '../../utils/getIdByUrl'
-import { getFromLocalStorage } from '../../hook/useLocalStore'
+import { swApi } from '@services/api'
+import { CharacterResponseData } from '@models/CharacterResponseData'
+import { getIdByUrl } from '@utils/getIdByUrl'
+import { getFromLocalStorage } from '@hooks/useLocalStore'
 
 export interface ListResponse {
   count: number;
@@ -21,6 +21,8 @@ export interface ApiErrorResponse {
 
 export const PAGE_LIMIT = 10
 
+// NOTE: This function and solution with local store is here only 
+// only because such demands
 const modifyResults = (results: CharacterResponseData[]) => {
   return results.map(item => ({
     ...item,
@@ -54,3 +56,5 @@ const api = swApi.injectEndpoints({
 })
 
 export default api
+
+export const { useGetListQuery } = api

@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = function(_env, argv) {
   const isProduction = argv.mode === 'production'
@@ -45,10 +46,18 @@ module.exports = function(_env, argv) {
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
       alias: {
-        '@app': path.resolve(__dirname, 'src/app/'),
+        '@constants': path.resolve(__dirname, './src/constants'),
+        '@app': path.resolve(__dirname, './src/app'),
+        '@models': path.resolve(__dirname, './src/models'),
+        '@services': path.resolve(__dirname, './src/services'),
+        '@utils': path.resolve(__dirname, './src/utils'),
+        '@hooks': path.resolve(__dirname, './src/hooks'),
       },
     },
     plugins: [
+      new Dotenv({
+        path: `./.env.${argv.mode}`
+      }),
       new ESLintPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'public/index.html'),

@@ -3,6 +3,7 @@ import { TextField, debounce } from '@mui/material'
 import { useSearchParams } from 'react-router-dom'
 
 function Search() {
+  const textFieldId = useId()
   const inputRef = useRef<HTMLInputElement>()
   const [ URLSearchParams, setURLSearchParams ] = useSearchParams()
 
@@ -40,10 +41,11 @@ function Search() {
 
   return (
     <TextField
+      label="Search"
+      name="search"
       inputRef={inputRef}
       fullWidth
-      id={useId()}
-      label='Search'
+      id={textFieldId}
       onChange={debouncedHandleChange}
     />
   )

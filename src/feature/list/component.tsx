@@ -1,27 +1,24 @@
 import { Box, Grid } from '@mui/material'
-import api from './api'
 import { useSearchParams } from 'react-router-dom'
+import { useGetListQuery } from './api'
 import { Pagination } from './components/pagination'
 import { List } from './components/list'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
-import { useMemo } from 'react'
 
+const footerSX = {
+  flex: 1,
+  flexGrow: 1,
+  display: 'flex',
+  justifyContent: 'center',
+  py: 5
+}
 
 function ListScreen() {
   const [ URLSearchParams ] = useSearchParams()
-  const { useGetListQuery } = api
 
   const { data, isLoading, error, isFetching } = useGetListQuery(
     Object.fromEntries(URLSearchParams)
   )
-
-  const footerSX = useMemo(() => ({
-    flex: 1,
-    flexGrow: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    py: 5
-  }), [])
 
   return (
     <>

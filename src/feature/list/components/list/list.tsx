@@ -1,12 +1,10 @@
-import { useMemo } from 'react'
-import Cell from './cell'
-import { Box, Button, Typography } from '@mui/material'
+import { useCallback } from 'react'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import { useSearchParams } from 'react-router-dom'
-import TravelExploreIcon from '@mui/icons-material/TravelExplore'
-import { CharacterResponseData } from '../../../../models/CharacterResponseData'
-import { store } from '../../../../app/store'
-
+import { CharacterResponseData } from '@models/CharacterResponseData'
+import { Cell } from './cell'
+import { Oops } from './oops'
+import { Empty } from './empty'
 
 export type ListProps<P = React.PropsWithChildren> = P & {
   error?: FetchBaseQueryError;
@@ -16,62 +14,26 @@ export type ListProps<P = React.PropsWithChildren> = P & {
 
 export default function ({ isLoading, data, error }: ListProps) {
   const [ , setURLSearchParams ] = useSearchParams()
-  // const data = useAppSelector(selectCharacters)
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setURLSearchParams(() => new URLSearchParams())
-  }
+  }, [setURLSearchParams])
 
   if (error) {
     return (
-      <Typography
-        component="div"
-        flex={1}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-      >
-        <Box fontSize="h1.fontSize">{error.status}</Box>
-        <Box fontSize="h6.fontSize" marginBottom={5}>
-          Oops, something went wrong
-        </Box>
-        <Button
-          onClick={handleClick}
-          variant="outlined"
-          size="large"
-        >
-          Retry
-        </Button>
-      </Typography>
+      <Oops
+        onClick={handleClick}
+        title={`${error.status}`}
+      />
     )
   }
 
   const dataSet: undefined|Array<CharacterResponseData | undefined> =
     isLoading ? Array.from({ length: 6 }) : data
 
-  const iconStyles = useMemo(() => ({
-    fontSize: 60,
-    marginTop: 5,
-    marginBottom: 3
-  }), [])
-
   if (!dataSet?.length) {
     return (
-      <Typography
-        component="div"
-        flex={1}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-      >
-        <TravelExploreIcon sx={iconStyles}/>
-        <Typography
-          variant="h6"
-          textAlign="center"
-        >
-          {'Sorry, we couldn\'t find what you\'re looking for'}
-        </Typography>
-      </Typography>
+      <Empty/>
     )
   }
 

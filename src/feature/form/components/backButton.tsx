@@ -1,10 +1,11 @@
 import { IconButton } from '@mui/material'
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined'
 import { useNavigate } from 'react-router-dom'
+import { useCallback } from 'react'
 
 function BackButton() {
   const navigate = useNavigate()
-  const handleClick = () => navigate(-1)
+  const handleClick = useCallback(() => navigate(-1), [navigate])
 
   return (
     <IconButton

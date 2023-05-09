@@ -38,4 +38,6 @@
 - Run `make docker-tag`
 - Run `make docker-push`
 
+### ENV file (.env.production) or (.env.development)
 
+- `API_ROOT='https://swapi.dev/api'`

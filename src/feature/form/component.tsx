@@ -1,13 +1,13 @@
-import { useMemo } from 'react'
-import { Button, FormHelperText, Grid, TextField } from '@mui/material'
+import { useCallback, useMemo } from 'react'
+import { Button, CircularProgress, FormHelperText, Grid, TextField, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import api, { useGetByIDQuery, useUnpdateByIDMutation } from './api'
 import schema, { FormFields } from './schema'
-import { useLocalStorage } from '../../hook/useLocalStore'
-import { useAppDispatch } from '../../hook/useApp'
-import { CharacterResponseData } from '../../models/CharacterResponseData'
+import { useLocalStorage } from '@hooks/useLocalStore'
+import { useAppDispatch } from '@hooks/useApp'
+import { CharacterResponseData } from '@models/CharacterResponseData'
 
 
 function Form() {
@@ -29,7 +29,7 @@ function Form() {
     mode: 'onBlur',
   })
 
-  const onSubmit: SubmitHandler<FormFields> = updatedData => {
+  const onSubmit: SubmitHandler<FormFields> = useCallback(updatedData => {
     if (characterID) {
       dispatch(api.util.resetApiState())
       setToLocalStorage(updatedData)
@@ -39,6 +39,25 @@ function Form() {
       })
       navigate(-1)
     }
+  }, [characterID, data, dispatch, navigate, setToLocalStorage, updateByID])
+
+  if (isLoading) {
+    return (
+      <Grid container justifyContent="center">
+        <CircularProgress />
+      </Grid>
+    )
+  }
+
+  if (isError) {
+    return (
+      <Typography
+        variant="h6"
+        textAlign="center"
+      >
+        {'Sorry, somesing went wrong, try to reload page'}
+      </Typography>
+    )
   }
 
   if (!data) {
