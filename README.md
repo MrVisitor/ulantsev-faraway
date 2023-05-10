@@ -38,6 +38,14 @@
 - Run `make docker-tag`
 - Run `make docker-push`
 
+Note that you need to set environment variables AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_REGION
+
 ### ENV file (.env.production) or (.env.development)
 
 - `API_ROOT='https://swapi.dev/api'`
+
+### ENV file for the terraform has path /terraform/.env
+
+- `AWS_ACCESS_KEY_ID=your_key_value`
+- `AWS_SECRET_ACCESS_KEY=your_key_value`
+- `region=us-east-1`

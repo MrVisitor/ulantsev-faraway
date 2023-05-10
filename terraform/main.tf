@@ -9,9 +9,9 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region     = "us-east-1"
-  access_key = "AKIA364IBZJERJMIAAJC"
-  secret_key = "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"
+  region     = local.envs["AWS_REGION"]
+  access_key = local.envs["AWS_ACCESS_KEY_ID"]
+  secret_key = local.envs["AWS_SECRET_ACCESS_KEY"]
 }
 
 # Providing a reference to our default VPC
@@ -173,9 +173,4 @@ resource "aws_security_group" "service_security_group" {
     protocol    = "-1" # Allowing any outgoing protocol 
     cidr_blocks = ["0.0.0.0/0"] # Allowing traffic out to all IP addresses
   }
-}
-
-#Log the load balancer app URL
-output "app_url" {
-  value = aws_alb.application_load_balancer.dns_name
 }
